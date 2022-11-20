@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import auth from './../auth/auth-helper'
 import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
+import { grey } from '@material-ui/core/colors'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -17,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
     textAlign: 'center',
     marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    boxShadow: ' -5px 5px 5px black',
   },
   error: {
     verticalAlign: 'middle'
@@ -81,7 +83,7 @@ export default function Signin(props) {
       <Card className={classes.card}>
         <CardContent>
           <Typography variant="h6" className={classes.title}>
-            Sign In
+            Login
           </Typography>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
           <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
@@ -96,5 +98,6 @@ export default function Signin(props) {
           <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
         </CardActions>
       </Card>
+      
     )
 }

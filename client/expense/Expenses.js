@@ -14,7 +14,12 @@ import DeleteExpense from './DeleteExpense'
 import Icon from '@material-ui/core/Icon'
 import {Redirect} from 'react-router-dom'
 import DateFnsUtils from '@date-io/date-fns'
+import {Link, withRouter} from 'react-router-dom'
 import { DatePicker, DateTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers"
+import html2canvas from "html2canvas"
+import {jsPDF} from 'jspdf'
+import DownloadPage from '../DownloadPage'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -112,6 +117,44 @@ export default function Expenses() {
             }
         })
     }
+    const downloadFileDocument = ()=>{
+      
+      // const elems =document.getElementById("pagetoDownload")
+      
+      //   html2canvas(elems).then((canvas)=>{
+      //       const imgData=canvas.toDataURL("image/png")
+      //       const pdf=new jsPDF()
+      //       pdf.addImage(imgData,"JPEG",50,100)
+      //       pdf.save('Expenseslist.pdf')
+      //   })
+      //  const elems=document.getElementsByName("pagetoDownload")
+      //  const pdf=new jsPDF()
+      //  elems.forEach((element,i)=>{
+      //   html2canvas(element).then((canvas)=>{
+      //     const img = canvas.toDataURL('image/jpeg')
+      //     pdf.addImage(img,"JPEG",10,50)
+      //     const sellist= elems.length === i+1
+      //     if(sellist)
+      //     {
+      //       pdf.save("ExpensesList.pdf")
+      //     }
+      //     else{
+      //       doc.addPage()
+      //     }
+      //   })
+      //  })
+
+      // Original
+      // const input = document.getElementById("pagetoDownload")
+      //   html2canvas(input).then((canvas)=>{
+      //       const imgData=canvas.toDataURL("image/png")
+      //       const pdf=new jsPDF("p","pt","a4")
+      //       pdf.addImage(imgData,"JPEG",10,50)
+      //       pdf.save('Expenseslist.pdf')
+      //   })
+  
+      
+  }
     const handleChange = (name, index) => event => {
         const updatedExpenses = [...expenses]
         updatedExpenses[index][name] = event.target.value
@@ -137,6 +180,7 @@ export default function Expenses() {
             }
         })
     }
+    
     const removeExpense = (expense) => {
         const updatedExpenses = [...expenses]
         const index = updatedExpenses.indexOf(expense)
@@ -148,7 +192,8 @@ export default function Expenses() {
         return <Redirect to='/signin'/>
     }
     return (
-      <div className={classes.root}>
+      
+      <div className={classes.root} id="pagetoDownload">
       <div className={classes.search}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
@@ -169,8 +214,13 @@ export default function Expenses() {
                     onChange={handleSearchFieldChange('lastDay')}
                 />      
         </MuiPickersUtilsProvider>
-        <Button variant="contained" color="secondary" onClick={searchClicked}>GO</Button>
-        </div>
+        <Button variant="contained" color="secondary" onClick={searchClicked} style={{marginRight: 5}}>GO</Button> 
+        <DownloadPage rootelementId="pagetoDownload" downloadFileName="ExpensesList"/>
+
+         {/* <Button variant="contained" color="secondary" onClick={downloadFileDocument}>Download</Button> */}
+      
+        {/* <DownloadPage rootelementId="pagetodownload" downloadFileName="ListofExpenses"/> */}
+      </div>
         
       {expenses.map((expense, index) => {
             return   <span key={index}>
@@ -179,7 +229,7 @@ export default function Expenses() {
             expandIcon={<Edit />}
           >
             <div className={classes.info}>
-                <Typography className={classes.amount}>$ {expense.amount}</Typography><Divider style={{marginTop: 4, marginBottom: 4}}/>
+                <Typography className={classes.amount}>Rs.{expense.amount}</Typography><Divider style={{marginTop: 4, marginBottom: 4}}/>
                 <Typography>
                     {expense.category}
                 </Typography>
@@ -196,7 +246,7 @@ export default function Expenses() {
           <ExpansionPanelDetails style={{display: 'block'}}>
           <div>
               <TextField label="Title" className={classes.textField} value={expense.title} onChange={handleChange('title', index)} margin="normal"/>
-             <TextField label="Amount ($)" className={classes.textField} value={expense.amount} onChange={handleChange('amount', index)} margin="normal" type="number"/>
+             <TextField label="Amount (Rs.)" className={classes.textField} value={expense.amount} onChange={handleChange('amount', index)} margin="normal" type="number"/>
           </div>
           <div>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -236,6 +286,10 @@ export default function Expenses() {
         </ExpansionPanel>
         </span>
         })}
+
+      
       </div>
+
+      
     )
   }

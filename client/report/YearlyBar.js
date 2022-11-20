@@ -72,7 +72,7 @@ export default function Reports() {
                     data={yearlyExpense.monthTot}
                     x={monthStrings['x']}
                     domain={{x: [0, 13]}}
-                    labels={({ datum }) => `$${datum.y}`}
+                    labels={({ datum }) => `Rs.${datum.y}`}
                 />
           </VictoryChart>
       </div>

@@ -6,6 +6,8 @@ import Divider from '@material-ui/core/Divider'
 import {Link} from 'react-router-dom'
 import auth from '../auth/auth-helper'
 import {currentMonthPreview, expenseByCategory} from './../expense/api-expense.js'
+import { values } from 'lodash'
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -120,10 +122,10 @@ export default function Home(){
         <Card className={classes.card}>
             <Typography variant="h4" className={classes.title2} color="textPrimary" style={{textAlign:'center'}}>You've spent</Typography>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                <Typography component="span" className={classes.totalSpent}>${expensePreview.month ? expensePreview.month.totalSpent : '0'} <span style={{display: 'block', fontSize:'0.3em'}}>so far this month</span></Typography>
+                <Typography component="span" className={classes.totalSpent}>Rs.{expensePreview.month ? expensePreview.month.totalSpent : '0'} <span style={{display: 'block', fontSize:'0.3em'}}>so far this month</span></Typography>
                 <div style={{margin:'20px 20px 20px 30px' }}>
-                  <Typography variant="h5" className={classes.spent} color="primary">${expensePreview.today ? expensePreview.today.totalSpent : '0'} <span className={classes.day}>today</span></Typography>
-                  <Typography variant="h5" className={classes.spent} color="primary">${expensePreview.yesterday ? expensePreview.yesterday.totalSpent: '0'} <span className={classes.day}>yesterday </span></Typography>
+                  <Typography variant="h5" className={classes.spent} color="primary">Rs.{expensePreview.today ? expensePreview.today.totalSpent : '0'} <span className={classes.day}>today</span></Typography>
+                  <Typography variant="h5" className={classes.spent} color="primary">Rs.{expensePreview.yesterday ? expensePreview.yesterday.totalSpent: '0'} <span className={classes.day}>yesterday </span></Typography>
                   <Link to="/expenses/all"><Typography variant="h6">See more</Typography></Link>
                 </div>
               </div>
@@ -139,15 +141,20 @@ export default function Home(){
                 <Typography component="span" className={`${classes.catHeading} ${classes.val}`}>{expense.mergedValues.total && expense.mergedValues.total-expense.mergedValues.average > 0 ? "spent extra" : "saved"}</Typography>
                 </div>
                 <div style={{marginBottom: 3}}>
-                <Typography component="span" className={classes.val} style={{color:'#595555', fontSize:'1.15em'}}>${expense.mergedValues.average}</Typography>
-                <Typography component="span" className={classes.val} style={{color:'#002f6c', fontSize:'1.6em', backgroundColor: '#eafff5', padding: '8px 0'}}>${expense.mergedValues.total? expense.mergedValues.total : 0}</Typography>
-                <Typography component="span" className={classes.val} style={{color:'#484646', fontSize:'1.25em'}}>${expense.mergedValues.total? Math.abs(expense.mergedValues.total-expense.mergedValues.average) : expense.mergedValues.average}</Typography>
+                <Typography component="span" className={classes.val} style={{color:'#595555', fontSize:'1.15em'}}>Rs.{expense.mergedValues.average}</Typography>
+                <Typography component="span" className={classes.val} style={{color:'#002f6c', fontSize:'1.6em', backgroundColor: '#eafff5', padding: '8px 0'}}>Rs.{expense.mergedValues.total? expense.mergedValues.total : 0}</Typography>
+                <Typography component="span" className={classes.val} style={{color:'#484646', fontSize:'1.25em'}}>Rs.{expense.mergedValues.total? Math.abs(expense.mergedValues.total-expense.mergedValues.average) : expense.mergedValues.average}</Typography>
                 </div>
                 <Divider style={{marginBottom:10}}/>
                 </div>) 
               })}
+
+           
+
+
             </div>
         </Card> 
+        
     )
 }
 

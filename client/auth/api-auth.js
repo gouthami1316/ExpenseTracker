@@ -8,7 +8,7 @@ const signin = async (user) => {
       },
       credentials: 'include',
       body: JSON.stringify(user)
-    })
+    })  
     return await response.json()
   } catch(err) {
     console.log(err)
@@ -23,6 +23,8 @@ const signout = async () => {
     console.log(err)
   }
 }
+
+
 
 export {
   signin,

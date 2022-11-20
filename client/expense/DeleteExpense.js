@@ -53,6 +53,7 @@ export default function DeleteExpense(props) {
             Confirm
           </Button>
         </DialogActions>
+        
       </Dialog>
     </span>)
 }

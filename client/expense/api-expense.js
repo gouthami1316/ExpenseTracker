@@ -5,6 +5,7 @@ const create = async (credentials, expense) => {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
+         
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + credentials.t
         },
@@ -79,6 +80,7 @@ const create = async (credentials, expense) => {
       })
       return await response.json()
     }catch(err){
+      
       console.log(err)
     }
   }

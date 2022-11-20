@@ -36,6 +36,7 @@ export default function Reports() {
         const abortController = new AbortController()
         const signal = abortController.signal
         averageCategories({firstDay: firstDay, lastDay: lastDay},{t: jwt.token}, signal).then((data) => {
+          
           if (data.error) {
             setError(data.error)
           } else {
@@ -61,7 +62,7 @@ export default function Reports() {
             } else {
               setExpenses(data)
             }
-        })
+        });
     }
     return (
       <div>
@@ -101,7 +102,7 @@ export default function Reports() {
                 {
                     fontSize: '10px',
                     fill: '#013157'
-                }]} text={( {datum} ) => `${datum.x}\n $${datum.y}`}/>}
+                }]} text={( {datum} ) => `${datum.x}\n Rs.${datum.y}`}/>}
                  />
                  <VictoryLabel
           textAnchor="middle"

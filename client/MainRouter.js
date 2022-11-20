@@ -11,6 +11,8 @@ import Menu from './core/Menu'
 import NewExpense from './expense/NewExpense'
 import Expenses from './expense/Expenses'
 import Reports from './report/Reports'
+// import DownloadPage from './DownloadPage'
+
 
 const MainRouter = () => {
     return (<div>
@@ -25,7 +27,11 @@ const MainRouter = () => {
         <PrivateRoute path="/expenses/all" component={Expenses}/>
         <PrivateRoute path="/expenses/new" component={NewExpense}/>
         <PrivateRoute path="/expenses/reports" component={Reports}/>
-      </Switch>
+        {/* <PrivateRoute path="/DownloadPage" component={DownloadPage}/> */}
+
+
+
+    </Switch>
     </div>)
 }
 

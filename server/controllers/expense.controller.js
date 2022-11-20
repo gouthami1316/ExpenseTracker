@@ -34,9 +34,11 @@ const expenseByID = async (req, res, next, id) => {
     }
 }
 
+
 const read = (req, res) => {
     return res.json(req.expense)
 }
+
 
 const listByUser = async (req, res) => {
   let firstDay = req.query.firstDay
@@ -96,6 +98,7 @@ const currentMonthPreview = async (req, res) => {
 }
 
 // 2.
+
 const expenseByCategory = async (req, res) => {
   const date = new Date(), y = date.getFullYear(), m = date.getMonth()
   const firstDay = new Date(y, m, 1)
@@ -205,6 +208,8 @@ const plotExpenses = async (req, res) => {
   }
 }
 
+
+
   const update = async (req, res) => {
     try {
       let expense = req.expense
@@ -218,7 +223,10 @@ const plotExpenses = async (req, res) => {
       })
     }
   }
+ 
   
+
+
 const remove = async (req, res) => {
     try {
       let expense = req.expense
@@ -231,6 +239,8 @@ const remove = async (req, res) => {
     }
 }
 
+
+
 const hasAuthorization = (req, res, next) => {
   const authorized = req.expense && req.auth && req.expense.recorded_by._id == req.auth._id
   if (!(authorized)) {
@@ -240,6 +250,9 @@ const hasAuthorization = (req, res, next) => {
   }
   next()
 }
+
+
+
 
 export default {
     create,
